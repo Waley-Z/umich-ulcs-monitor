@@ -83,6 +83,7 @@ def quit(signo, _frame):
 
 def main():
     """Run multiple monitors."""
+    # Add your course here.
     Monitor(477)
     Monitor(388)
 
