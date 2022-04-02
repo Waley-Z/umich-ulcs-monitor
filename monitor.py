@@ -12,7 +12,7 @@ from config import sender_email, sender_password, receiver_email
 SENDER_EMAIL = sender_email
 SENDER_PASSWORD = sender_password # if using Gmail, check https://support.google.com/accounts/answer/185833
 RECEIVER_EMAIL = receiver_email
-INTERVAL = 5  # Time to wait between requests in seconds
+UPDATE_INTERVAL = 5  # Time to wait between requests in seconds
 
 exit = Event()
 
@@ -34,7 +34,7 @@ class Monitor:
                 page = response.text
             except requests.exceptions.RequestException as e:
                 print(e)
-                exit.wait(INTERVAL)
+                exit.wait(UPDATE_INTERVAL)
                 continue
 
             # parse the page
@@ -55,7 +55,7 @@ class Monitor:
             current_time = time.strftime("%H:%M:%S", t)
             print(f"{current_time} EECS {self.course_num} has {min(seats)} seats.")
             if min(seats) > 0:
-                exit.wait(INTERVAL)
+                exit.wait(UPDATE_INTERVAL)
             else:
                 print(self.course_num + " is full now!")
                 msg = MIMEText("Register EECS " + self.course_num + " now!")
