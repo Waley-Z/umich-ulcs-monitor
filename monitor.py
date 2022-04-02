@@ -66,7 +66,6 @@ class Monitor:
                 s.starttls()
                 s.login(SENDER_EMAIL, SENDER_PASSWORD)
                 s.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, msg.as_string())
-                s.sendmail(SENDER_EMAIL, "jerrycmy@umich.edu", msg.as_string())
                 s.quit()
                 break
 
