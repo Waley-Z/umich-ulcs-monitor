@@ -49,7 +49,9 @@ class Monitor:
                         for s in div.text.split():
                             if s.isdigit():
                                 seats.append(int(s))
-
+            if not seats:
+                exit.wait(UPDATE_INTERVAL)
+                continue
             # print query result
             t = time.localtime()
             current_time = time.strftime("%H:%M:%S", t)
@@ -59,7 +61,7 @@ class Monitor:
             else:
                 print(self.course_num + " is full now!")
                 msg = MIMEText("Register EECS " + self.course_num + " now!")
-                msg["Subject"] = "[BOT] Course Registration Reminder"
+                msg["Subject"] = f"[EECS {self.course_num}] Course Registration Reminder"
                 msg["From"] = SENDER_EMAIL
                 msg["To"] = RECEIVER_EMAIL
                 s = smtplib.SMTP("smtp.gmail.com", 587)
