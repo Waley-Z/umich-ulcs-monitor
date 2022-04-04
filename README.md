@@ -31,6 +31,8 @@ With the [Two Course Limit](https://cse.engin.umich.edu/academics/for-current-st
 
 ## Deployment on CAEN
 
+***Update:** The following approach is **NOT** feasible. CAEN ssh service is not intended for long running jobs. The socket will be killed on the server side after a certain time. Please deploy the program on your virtual machine.*
+
 Not all of us have a server available or a laptop running all day long. Deploying the program on [CAEN](https://caen.engin.umich.edu/connect/linux-login-service/) is then a good choice.
 
 - First, connect to CAEN's Linux Remote Login Service using Secure Shell (SSH). To make it easier for future login without typing out the uniqname, hostname and using DUO every time, we can write these info in a config file. Edit the file with the path `~/.ssh/config` by appending the lines below.
@@ -54,11 +56,18 @@ Not all of us have a server available or a laptop running all day long. Deployin
 
 - `git clone` the project and follow the configuration above.
 
+## Deployment on Virtual Machine
+
+Another choice is to deploy the program on a virtual machine. Popular service providers include [Microsoft Azure Student](https://azure.microsoft.com/en-us/free/students/) and [Amazon AWS Educate](https://aws.amazon.com/education/awseducate/). Given the free credits for students, we can establish a virtual machine for free.
+
+## Using `tmux` to Keep Processes Running
+
 We will use `tmux` to run the program so that it will continue running after the ssh session disconnects. Learn more about other [approaches](https://unix.stackexchange.com/questions/479/keep-processes-running-after-ssh-session-disconnects) and a beginner [guide](https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/) to `tmux`.
 
-- Start `tmux` with a new session
+- On CAEN or your virtual machine, start `tmux` with a new session
 
   ```bash
+  $ ssh azure
   $ tmux
   ```
 
@@ -70,7 +79,11 @@ We will use `tmux` to run the program so that it will continue running after the
   $ python3 monitor.py
   ```
 
-- Detach from the session by pressing `C-b d`, which means press `Ctrl+b`, release, and then press `d`.
+- Detach from the session by pressing `C-b d`, which means press `Ctrl+b`, release, and then press `d`. You will get the output
+
+  ```
+  [detached (from session 0)]
+  ```
 
 - Disconnect ssh as you want
 
@@ -81,10 +94,10 @@ We will use `tmux` to run the program so that it will continue running after the
 - After reconnecting to ssh, attach to `tmux` session
 
   ```bash
-  $ ssh caen
+  $ ssh azure
   $ tmux attach
   ```
-  
+
   The program should still be running properly.
 
 ## Acknowledgement
