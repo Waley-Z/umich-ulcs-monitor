@@ -23,8 +23,8 @@ class Monitor:
     def monitor_run(self):
         """Run monitor thread."""
         while not exit.is_set():
-            url = "https://www.lsa.umich.edu/cg/cg_detail.aspx?content=2410EECS" + \
-                self.course_num + "001&termArray=f_22_2410"
+            url = "https://www.lsa.umich.edu/cg/cg_detail.aspx?content=2420EECS" + \
+                self.course_num + "001&termArray=w_23_2420"
             headers = {
                 "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"}
 
